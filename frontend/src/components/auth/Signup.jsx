@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {USER_API_END_POINT} from '../../utils/content.js'
 import axios from "axios";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 const Signup = () => {
     const [input, setInput] = useState({
@@ -27,6 +28,7 @@ const Signup = () => {
     const changeFileHandler = (e) => {
         setInput({...input, file: e.target.files?. [0]});
     }
+    const[loading, setLoading] = useState(false);
 
     const submitHandler = async(e) => {
         e.preventDefault();
@@ -42,6 +44,7 @@ const Signup = () => {
         }
 
         try {
+          setLoading(true);
           console.log(`${USER_API_END_POINT}/register`)
           const res = await axios.post(`${USER_API_END_POINT}/register`, formData);
           console.log(res);
@@ -54,6 +57,8 @@ const Signup = () => {
           
         } catch (error) {
           toast.error(error.response.data.message);
+        }finally{
+          setLoading(false);
         }
     }
 
@@ -61,7 +66,7 @@ const Signup = () => {
     <div>
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
-        <form onSubmit={submitHandler} className="w-1/2 border-gray-200 rounded-md p-4 my-10">
+        <form onSubmit={submitHandler} className="w-1/2 border border-gray-300 rounded-lg p-4 my-10 bg-slate-200">
           <h1 className="font-bold text-xl mb-5">Sign-Up</h1>
           <div className="my-2">
             <Label>Full Name</Label>
@@ -69,7 +74,8 @@ const Signup = () => {
             value = {input.fullname}
             name="fullname"
             onChange = {changeEventHandler}
-             placeholder="Rk..." />
+             placeholder="Fullname..."
+             className='rounded-full border-gray-400' />
           </div>
           <div className="my-2">
             <Label>Email</Label>
@@ -77,7 +83,8 @@ const Signup = () => {
             name="email" 
             value = {input.email}
             onChange = {changeEventHandler} 
-            placeholder="rk@gmail.com" />
+            placeholder="example@gmail.com" 
+            className='rounded-full border-gray-400'/>
           </div>
           <div className="my-2">
             <Label>PhoneNumber</Label>
@@ -85,7 +92,8 @@ const Signup = () => {
             name="phonenumber" 
              value = {input.phoneNumber}
              onChange = {changeEventHandler} 
-             placeholder="123456789." />
+             placeholder="123456789."
+             className='rounded-full border-gray-400' />
           </div>
           <div className="my-2">
             <Label>Password</Label>
@@ -94,7 +102,8 @@ const Signup = () => {
              name="password" 
              value = {input.password}
              onChange = {changeEventHandler} 
-            placeholder="password"
+            placeholder="****"
+            className='rounded-full border-gray-400'
              />
           </div>
           <RadioGroup className="flex items-center gap-4 my-5" >
@@ -105,7 +114,8 @@ const Signup = () => {
                 value="student"
                 checked={input.role === "student"}
                 onChange = {changeEventHandler}
-                className="cursor-pointer"
+                className="cursor-pointer rounded-full border-gray-400"
+                
                 />
               <Label htmlFor="r1">Student</Label>
             </div>
@@ -128,11 +138,17 @@ const Signup = () => {
               type ="file"
               onChange = {changeFileHandler}
 
-              className="cursor-pointer"
+              className="cursor-pointer rounded-full border-gray-400[p"
 
             />
           </div>
-          <Button type = "submit" className= "w-full my-4">Sign-up</Button>
+          {
+               loading ? <Button className="w-full my-4  "> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4 bg-slate-900 hover:bg-gray-500 text-white rounded-full" >Sign-Up</Button>
+          }
+
+
+
+          {/* <Button type = "submit" className= "w-full my-4">Sign-up</Button> */}
           <span className="text-sm">Already have an account ?? <Link to = "/login" className="text-blue-600">Login</Link></span>
         </form>
       </div>

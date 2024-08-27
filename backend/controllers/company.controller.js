@@ -1,5 +1,7 @@
 import {Company} from '../models/company.model.js';
 import {User} from '../models/user.model.js';
+import getDataUri from '../utils/datauri.js';
+import cloudnary from '../utils/cloudnary.js';
 
 
 export const registerCompany = async(req, res) => {
@@ -84,8 +86,13 @@ export const getCompany = async (req, res) => {
     try {
         const{name, description, website, location} = req.body;
         const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudnary.uploader.upload(fileUri.content)
+        const logo = cloudResponse.secure_url;
+        console.log(logo);
 
-        const updateData = {name, description, website, location};
+
+        const updateData = {name, description, website, location, logo};
         const company = await Company.findByIdAndUpdate(req.params.id, updateData, {new: true});
 
         if(!company){
