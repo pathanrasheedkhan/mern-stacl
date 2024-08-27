@@ -27,8 +27,7 @@ const HeroSection = () => {
           <span className="text-[#6A38c2]">Dreame Job</span>{" "}
         </h1>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus
-          reprehenderit dolore praesentium quis corporis.
+           the site you can search job and your applied jobs and their status will be shoen in your profile
         </p>
         <div className="flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto">
             <input type="text"
