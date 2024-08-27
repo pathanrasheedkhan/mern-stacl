@@ -62,7 +62,9 @@ export const login = async (req, res) => {
                 success: false,
             });
         };
-        let user = await User.findOne({email:email});        
+        let user = await User.findOne({email:email}); 
+        console.log(user , email);
+
         if(!user){
             return res.status(400).json({
                 message: 'Invalid credentials',
@@ -102,7 +104,7 @@ export const login = async (req, res) => {
         }
 
         return res.status(200).cookie('token', token,{maxAge: 1*24*60*60*1000, httpsOnly: true, sameSite: 'strict'}).json({
-            message: 'Logged in successfully ${user.fullname}',
+            message: `Logged in successfully ${user.fullname}`,
             user,
             success: true,
             

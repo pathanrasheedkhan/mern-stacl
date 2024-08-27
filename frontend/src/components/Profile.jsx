@@ -10,10 +10,12 @@ import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
 import UpdateProfileDialog from "./UpdateProfileDialog";
 import { useSelector } from "react-redux";
+import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 // const skills = ["Html", "css", "js "];
 const isResume = true;
 
 const Profile = () => {
+  useGetAppliedJobs();
   const [open, setOpen] = useState(false);
   const { user } = useSelector((store) => store.auth);
   return (
@@ -35,11 +37,11 @@ const Profile = () => {
           </div>
           <Button
             onClick={() => setOpen(true)}
-            className="text-right"
+            className="text-right rounded-full "
             variant="outline"
           >
             {" "}
-            <Pen />
+            <Pen  className="font-light"/>
           </Button>
         </div>
         <div className="my-2">
