@@ -14,6 +14,7 @@ import { setLoading, setUser } from "@/redux/authslice";
 import { useDispatch, useSelector } from "react-redux";
 import store from "@/redux/srore";
 import { Loader2 } from "lucide-react";
+import './Login.css'
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -57,8 +58,11 @@ const Login = () => {
     }
   };
   return (
+
+   
     <div>
-      <Navbar />
+      <Navbar  />
+     
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
           onSubmit={submitHandler}
@@ -124,7 +128,8 @@ const Login = () => {
           </span>
         </form>
       </div>
-    </div>
+     </div>
+    
   );
 };
 

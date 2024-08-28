@@ -5,7 +5,6 @@ import { Search } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "@/redux/jobSlice";
 import { useNavigate } from "react-router-dom";
-import image  from '../assets/hro.avif'
 
 
 const HeroSection = () => {
